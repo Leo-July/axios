@@ -1,7 +1,6 @@
 import axios from "./default";
 import request from './request'
 import response from './response'
-import store from '../store'
 import {
   Indicator,
 } from 'mint-ui';
@@ -17,19 +16,34 @@ export default new class Axios {
       response.res,
       response.error
     )
-    // 监听store loading 值的变化
-    store.watch(state => {
-      return state.loading
-    }, () => {
-      if (store.state.loading) {
-        Indicator.open({
-          spinnerType: 'fading-circle'
-        })
-      } else {
-        Indicator.close()
-      }
-    })
+
+    this.requestList = {
+      el: []
+    }
   }
+  get requestList() {
+    return this._requestList
+  }
+  set requestList({
+    el,
+    remove = false
+  } = {}) {
+    if (this._requestList) {
+      let array = [...this._requestList]
+      remove ? array.splice(array.indexOf(el), 1) : array.push(el)
+      this._requestList = array
+    }else{
+      this._requestList = el
+    }
+    if (this._requestList.length === 0) {
+      Indicator.close()
+    } else {
+      Indicator.open({
+        spinnerType: 'fading-circle'
+      })
+    }
+  }
+
   /**
    * 请求方法
    *
@@ -54,8 +68,9 @@ export default new class Axios {
     const id = `${url}TIME${new Date().getTime()}` // 生成id
 
     if (!silent) { // 非静默模式，压入请求队列
-      store.commit('pushRequest', id)
-      store.commit('setLoading', true)
+      this.requestList = {
+        el: id
+      }
     }
 
     try {
@@ -79,9 +94,9 @@ export default new class Axios {
       })
 
       finish()
-      store.commit('popRequest', id)
-      if (store.state.requestList.length === 0) {
-        store.commit('setLoading', false)
+      this.requestList = {
+        el: id,
+        remove: true
       }
     } catch (error) {
       console.log(error)
