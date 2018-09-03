@@ -32,7 +32,7 @@ export default new class Axios {
       let array = [...this._requestList]
       remove ? array.splice(array.indexOf(el), 1) : array.push(el)
       this._requestList = array
-    }else{
+    } else {
       this._requestList = el
     }
     if (this._requestList.length === 0) {
@@ -53,7 +53,7 @@ export default new class Axios {
    * @param {Boolean}   silent   静默模式
    * @param {Function}  success  请求成功回调
    * @param {Function}  success  请求失败回调
-   * @param {Function}  finish   请求结束回调
+   * @param {Function}  complete   请求结束回调
    *
    */
   async request({
@@ -63,7 +63,7 @@ export default new class Axios {
     silent = false,
     success = () => {},
     fail = () => {},
-    finish = () => {}
+    complete = () => {}
   } = {}) {
     const id = `${url}TIME${new Date().getTime()}` // 生成id
 
@@ -92,14 +92,14 @@ export default new class Axios {
       }).catch(error => {
         fail(error)
       })
-
-      finish()
       this.requestList = {
         el: id,
         remove: true
       }
     } catch (error) {
       console.log(error)
+    } finally {
+      complete()
     }
   }
 }()

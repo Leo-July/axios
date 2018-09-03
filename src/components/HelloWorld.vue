@@ -22,8 +22,8 @@ export default {
         fail: error => {
           console.log(error)
         },
-        finish: () => {
-          console.log('finish')
+        complete: () => {
+          console.log('complete')
         }
       })
     },
@@ -35,8 +35,8 @@ export default {
       },
       fail: error => {
         console.log(error)
-      }, finish: () => {
-        console.log('finish')
+      }, complete: () => {
+        console.log('complete')
       }
     })
     }
