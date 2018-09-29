@@ -1,7 +1,5 @@
 import qs from 'qs'
-import {
-  Toast
-} from 'mint-ui'
+
 export default {
   config: config => {
     if (
@@ -15,7 +13,6 @@ export default {
     return config
   },
   error: error => {
-    Toast(error)
     return Promise.reject(error)
   }
 }

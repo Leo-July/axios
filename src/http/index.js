@@ -3,6 +3,7 @@ import request from './request'
 import response from './response'
 import {
   Indicator,
+  Toast
 } from 'mint-ui';
 
 export default new class Axios {
@@ -97,7 +98,7 @@ export default new class Axios {
         remove: true
       }
     } catch (error) {
-      console.log(error)
+      if (silent) Toast(error.msg)
     } finally {
       complete()
     }
