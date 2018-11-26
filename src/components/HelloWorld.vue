@@ -1,49 +1,59 @@
 <template>
   <div class="hello">
-    <button @click="fetchFast">快接口</button>
-    <button @click="fetchLow">慢接口</button>
+    <p class="tip">测试最好在开发者工具中修改Network为fast 3g,想过才更明显</p>
+    <button @click="fetchNormal">有loading和错误toast</button>
+    <button @click="fetchSilent">没有loading和toast</button>
+    <p>{{res}}</p>
   </div>
 </template>
 
 <script>
 import base from '../api/base'
+import { Toast } from 'mint-ui'
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
   },
+  data(){
+    return {
+      res:''
+    }
+  },
   methods: {
-    fetchFast() {
-      base.getPublicInfo({
-        data: { uid: '664316171' },
+    fetchNormal () {
+      this.res = ''
+      base.getNews({
         success: res => {
-          console.log(res)
+          this.res = JSON.stringify(res)
+          console.log('success')
         },
         fail: error => {
-          console.log(error)
+          Toast(error)
         },
         complete: () => {
           console.log('complete')
         }
       })
     },
-    fetchLow(){
-    base.getLowInfo({
-      // silent: true,
-      success: res => {
-        console.log(res)
-      },
-      fail: error => {
-        console.log(error)
-      }, complete: () => {
-        console.log('complete')
-      }
-    })
+    fetchSilent () {
+      this.res = ''
+      base.getNews({
+        silent: true,
+        success: res => {
+          this.res = JSON.stringify(res) 
+          console.log('success')
+        },
+        fail: error => {
+          Toast(error)
+        },
+        complete: () => {
+          console.log('complete')
+        }
+      })
     }
   },
-  created() {
-    this.fetchLow()
-    this.fetchFast()
+  created () {
   }
 }
 </script>
