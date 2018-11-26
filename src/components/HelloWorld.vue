@@ -15,9 +15,9 @@ export default {
   props: {
     msg: String
   },
-  data(){
+  data () {
     return {
-      res:''
+      res: ''
     }
   },
   methods: {
@@ -41,7 +41,7 @@ export default {
       base.getNews({
         silent: true,
         success: res => {
-          this.res = JSON.stringify(res) 
+          this.res = JSON.stringify(res)
           console.log('success')
         },
         fail: error => {
