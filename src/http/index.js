@@ -17,7 +17,7 @@ export default new class Axios {
       response.error,
     )
 
-    this.requestList = []
+    this._requestList = []
   }
 
   /**
@@ -33,10 +33,6 @@ export default new class Axios {
    * @param {Object} list  请求队列
    */
   set requestList(list) {
-    if (!this._requestList) {
-      this._requestList = []
-      return
-    }
     this._requestList = list // 设置请求队列
     if (this._requestList.length === 0) {  // 如果请求队列为空了，就关闭loading
       Indicator.close()
