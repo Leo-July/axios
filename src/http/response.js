@@ -2,7 +2,7 @@ export default {
   res: res => {
     let data = res.data
     if (~~data.code === 200) {
-      return data.data
+      return data
     }
     return Promise.reject(data)
   },

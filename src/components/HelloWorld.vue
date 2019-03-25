@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <p class="tip">测试最好在开发者工具中修改Network为fast3g,想过才更明显</p>
+    <p class="tip">测试最好在开发者工具中修改Network为fast3g,效果才更明显</p>
     <button @click="fetchNormal">有loading和错误toast</button>
     <button @click="fetchSilent">没有loading和toast</button>
     <p>{{res}}</p>

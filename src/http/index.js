@@ -8,6 +8,7 @@ import Axios from './axios.config'
  * @param {Object}    headers  headers 设置
  * @param {Object}    data     参数
  * @param {Boolean}   silent   静默模式
+ * @param {Boolean}   all      返回接口所有数据（包括code、message、data）/ 只是data
  * @param {Function}  success  请求成功回调
  * @param {Function}  fail  请求失败回调
  * @param {Function}  complete   请求结束回调
