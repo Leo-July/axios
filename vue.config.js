@@ -2,20 +2,14 @@
 // https://cli.vuejs.org/config/
 module.exports = {
   productionSourceMap: true,
+  publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   devServer: {
     proxy: {
-      '/market-competitive-statistic.zpidc.com/': {
-        target: 'http://market-competitive-statistic.zpidc.com',
+      '/api.apiopen.top': {
+        target: 'https://api.apiopen.top',
         changeOrigin: true,
         pathRewrite: {
-          '^/market-competitive-statistic.zpidc.com/': '/',
-        },
-      },
-      '/user-competitive-score.zpidc.com/': {
-        target: 'http://user-competitive-score.zpidc.com/',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/user-competitive-score.zpidc.com/': '/',
+          '^/api.apiopen.top': '/',
         },
       },
     },

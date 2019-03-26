@@ -1,4 +1,5 @@
 import Axios from './axios.config'
+import { resolve } from 'path'
 
 /**
  * 请求方法
@@ -11,7 +12,7 @@ import Axios from './axios.config'
  *
  */
 
-export default function request({ url = '', method = 'get', data = {}, params = {}, headers = {}, silent = false } = {}) {
+export default function request({ url = '', method = 'get', data = {}, params = {}, headers = {}, silent = false, all = false } = {}) {
   // console.log(`${url}============>`, methods, data, silent)
   const id = `${url}TIME${new Date().getTime()}` // 生成id
   if (!silent) {
@@ -19,18 +20,22 @@ export default function request({ url = '', method = 'get', data = {}, params = 
     Axios.setRequestList({ id })
   }
 
-  return Axios.axios({
-    url,
-    method,
-    headers,
-    data,
-    params,
+  return new Promise((resolve, reject) => {
+    Axios.axios({
+      url,
+      method,
+      headers,
+      data,
+      params,
+    })
+      .then(res => {
+        Axios.setRequestList({ el: id, remove: true }) // 请求完成后，出队
+        all ? resolve(res) : resolve(res.data)
+      })
+      .catch(error => {
+        Axios.setRequestList({ el: id, remove: true }) // 请求完成后，出队
+        if (!silent) Axios.Toast(error.msg || error.message || error)
+        reject(error)
+      })
   })
-    .then(() => {
-      Axios.setRequestList({ el: id, remove: true }) // 请求完成后，出队
-    })
-    .catch(error => {
-      Axios.setRequestList({ el: id, remove: true }) // 请求完成后，出队
-      if (!silent) Axios.Toast(error.msg || error.message || error)
-    })
 }

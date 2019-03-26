@@ -1,19 +1,31 @@
 <template>
   <div class="hello">
-    <p class="tip">测试最好在开发者工具中修改Network为fast3g,效果才更明显</p>
-    <button @click="fetchNormal">有loading和错误toast</button>
-    <button @click="fetchSilent">没有loading和toast</button>
-    <p>{{res}}</p>
+    <p class="tip">在Network为fast3g下效果才更明显</p>
+    <div class="section">
+      <h3>回调函数请求</h3>
+      <mtButton @click="fetchNormal">有loading和错误toast</mtButton>
+      <mtButton @click="fetchSilent">没有loading和toast</mtButton>
+    </div>
+    <div class="section">
+      <h3>返回promise请求</h3>
+      <mtButton @click="ProFetchNormal">有loading和错误toast</mtButton>
+      <mtButton @click="ProFetchSilent">没有loading和toast</mtButton>
+    </div>
+
+    <p>{{res}}</p>
   </div>
 </template>
 
 <script>
-import base from '../api/base'
-import { Toast } from 'mint-ui'
+import base, { promiseFecthGetNew } from '../api/base'
+import { Toast, Button } from 'mint-ui'
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  components: {
+    mtButton: Button
   },
   data () {
     return {
@@ -51,7 +63,22 @@ export default {
           console.log('complete')
         }
       })
-    }
+    },
+    async ProFetchNormal () {
+      this.res = ''
+
+      const res = await promiseFecthGetNew()
+      console.log("TCL: ProFetchNormal -> res", res)
+
+      this.res = res
+    },
+    async ProFetchSilent () {
+      this.res = ''
+
+      const res = await promiseFecthGetNew({ silent: true })
+      console.log("TCL: ProFetchSilent -> res", res)
+      this.res = res
+    },
   },
   created () {
   }
