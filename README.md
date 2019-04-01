@@ -2,30 +2,34 @@
 
 [DEMO](http://leojuly.top/axios/#/)
 
-
 > 此项目是用[vue cli 3](https://cli.vuejs.org/zh/guide/) 脚手架生成的项目
 
 ## Project setup
+
 ```
 yarn install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
 yarn run serve
 ```
 
 ### Compiles and minifies for production
+
 ```
 yarn run build
 ```
 
 ### Lints and fixes files
+
 ```
 yarn run lint
 ```
 
 ## document
+
 ```js
 ┣━  http               // 采用类中的set,get方式监听请求接口队列
 ┃     ┣━ axios.config.js   // 创建axios实例
@@ -121,28 +125,29 @@ axios.defaults.timeout = 5000
 
 export default axios
 ```
+
 #### `request.js`
+
 ```js
 import qs from 'qs'
 
 export default {
   config: config => {
-    if (
-      config.method === 'post' ||
-      config.method === 'put' ||
-      config.method === 'delete'
-    ) { // 序列化
+    if (config.method === 'post' || config.method === 'put' || config.method === 'delete') {
+      // 序列化
       config.headers['Content-Type'] = 'application/json; charset=utf-8'
-      config.data = qs.stringify(config.data);
+      config.data = qs.stringify(config.data)
     }
     return config
   },
   error: error => {
     return Promise.reject(error)
-  }
+  },
 }
 ```
+
 #### `response.js`
+
 ```js
 export default {
   res: res => {
@@ -154,11 +159,12 @@ export default {
   },
   error: error => {
     return Promise.reject(error)
-  }
-
+  },
 }
 ```
+
 #### `index.js`
+
 ```js
 import Axios from './axios.config'
 
@@ -213,6 +219,7 @@ export default async function request({
   }
 }
 ```
-[git源码地址](https://github.com/Leo-July/axios)
+
+[git 源码地址](https://github.com/Leo-July/axios)
 
 [axios 中文使用文档](https://www.kancloud.cn/yunye/axios/234845)
