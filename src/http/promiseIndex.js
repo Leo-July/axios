@@ -1,5 +1,4 @@
 import Axios from './axios.config'
-import { resolve } from 'path'
 
 /**
  * 请求方法
