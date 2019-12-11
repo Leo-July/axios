@@ -40,8 +40,8 @@ yarn run lint
 ┣━  http_store         // 试了下采用vuex 的 watch api 监听请求队列
 ┃     ┣━ default.js
 ┃     ┣━ index.js      // vuex监听实现代码放在了这里
-┃     ┣━ request.js
-┃     ┣━ response.js
+┃     ┣━ request.js    // request 拦截器
+┃     ┣━ response.js   // response拦截器
 ```
 
 ---
