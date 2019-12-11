@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "babel-plugin-component": "^1.1.1",
     "mint-ui": "^2.2.13",
     "vue": "^2.5.16",
