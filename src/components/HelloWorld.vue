@@ -57,7 +57,7 @@ export default {
           console.log('success')
         },
         fail: error => {
-          Toast(error)
+          // Toast(error)
         },
         complete: () => {
           console.log('complete')
