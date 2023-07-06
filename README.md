@@ -219,7 +219,7 @@ export default async function request({
 ```
 test branch
 
-master branch
+master-remote branch
 [git 源码地址](https://github.com/Leo-July/axios)
 
 [axios 中文使用文档](https://www.kancloud.cn/yunye/axios/234845)
