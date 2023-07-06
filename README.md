@@ -1,7 +1,5 @@
 # axios
 
-[DEMO](http://demo.leojuly.top/axios/#/)
-
 > 此项目是用[vue cli 3](https://cli.vuejs.org/zh/guide/) 脚手架生成的项目
 
 ## Project setup
